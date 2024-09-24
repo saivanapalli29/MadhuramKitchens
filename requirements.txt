@@ -1,6 +1,6 @@
 asgiref>=3.8.1
 dj-database-url
-Django>=4.0,<5.0
+Django
 django-ckeditor>=6.3.0
 django-js-asset>=2.2.0
 packaging>=24.1
