@@ -7,9 +7,9 @@ build:
       - pip3 install Django # Install Django and dependencies
       - pip3 install -r requirements.txt
     post-build:
-      - python manage.py makemigrations
-      - python manage.py migrate
-      - python manage.py collectstatic
+      - python3 manage.py makemigrations
+      - python3 manage.py migrate
+      - python3 manage.py collectstatic --noinput
   env:
     - name: DEBUG
       value: "on"
@@ -33,14 +33,14 @@ run:
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DATABASE_NAME
-      value: "madhuram" 
+      value: "sai29" 
     - name: DATABASE_HOST
-      value: "my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com" 
+      value: "madhuramkitchen.c3y62mus6911.ap-south-1.rds.amazonaws.com" 
     - name: DATABASE_USERNAME
-      value: "postgres" 
+      value: "admin" 
     - name: DATABASE_PASSWORD
-      value: "Ninesoft1234"  
+      value: "saivanapalli"  
     - name: DATABASE_PORT
-      value: "5432" 
+      value: "3306" 
 
 
