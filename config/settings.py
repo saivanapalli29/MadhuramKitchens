@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import pymysql
+pymysql.install_as_MySQLdb()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,12 +87,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
      'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': os.getenv('DATABASE_NAME', 'madhuram'),
-         'USER': os.getenv('DATABASE_USER', 'postgres'),
-         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'Ninesoft1234'),
-         'HOST': os.getenv('DATABASE_HOST', 'my-db1-instance.cpwy0kssc35o.ap-south-1.rds.amazonaws.com'),
-         'PORT': os.getenv('DATABASE_PORT', '5432'),
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': os.getenv('DATABASE_NAME', 'sai29'),
+         'USER': os.getenv('DATABASE_USER', 'admin'),
+         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'saivanapalli'),
+         'HOST': os.getenv('DATABASE_HOST', 'madhuramkitchen.c3y62mus6911.ap-south-1.rds.amazonaws.com'),
+         'PORT': os.getenv('DATABASE_PORT', '3306'),
      }
 }
 
