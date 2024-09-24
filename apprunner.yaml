@@ -29,7 +29,10 @@ build:
       value: "3306"  
 
 run:
-  runtime-version: python311
-  command: python3 manage.py runserver 0.0.0.0:8080  # Use Django's built-in server
-  network:
-    port: 8080
+  runtime-version: 3.11
+  command: pip3 install gunicorn config.wsgi # Install gunicorn at runtime
+  pre-run: [] # Remove pre-run section
+  command: gunicorn config.wsgi --log-file -
+  network: 
+    port:  8080
+    env:   8080
