@@ -4,6 +4,7 @@ build:
   commands:
     build:
       - python3.11 -m ensurepip --upgrade  # Upgrade pip (optional)
+      - pip3 install Django
       - pip3 install -r requirements.txt    # Install all dependencies, including Django and gunicorn
     post-build:
       - python3 manage.py makemigrations
