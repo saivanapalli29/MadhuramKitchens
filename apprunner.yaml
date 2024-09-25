@@ -4,6 +4,8 @@ build:
   commands:
     build:
       - python3 -m ensurepip --upgrade # Upgrade pip (optional)
+      - pip3 install pipenv
+      - pipenv install
       - pip3 install gunicorn==20.1.0
       - pip3 install Django # Install Django and dependencies
       - pip3 install -r requirements.txt
@@ -20,7 +22,14 @@ build:
       value: "*"
 run:
   runtime-version: 3.11
-  command: "gunicorn config.wsgi:application --bind 0.0.0.0:8000 --log-file -"
+  pre-run:  
+  - pip3 install pipenv
+  - pipenv install
+  - python3 copy-global-files.py
+  command: pipenv run gunicorn config.wsgi --log-file -
+  network: 
+    port: 8000
+    env: 8000
   env:
     - name: DEBUG
       value: "on"
