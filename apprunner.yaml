@@ -20,7 +20,7 @@ build:
       value: "*"
 run:
   runtime-version: 3.11
-  command: python3 -m gunicorn config.wsgi:application --bind 0.0.0.0:8000 --log-file -
+  command: "gunicorn config.wsgi:application --bind 0.0.0.0:8000 --log-file -"
   env:
     - name: DEBUG
       value: "on"
