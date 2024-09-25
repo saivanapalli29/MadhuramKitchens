@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 
     'madhuramkitchen',
     'phonenumber_field',
-    'ckeditor',
     'ckeditor_uploader',
 ]
 
