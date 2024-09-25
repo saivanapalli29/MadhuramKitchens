@@ -1,19 +1,35 @@
 version: 1.0
 runtime: python311
-
 build:
-  commands: |
-    python3 -m ensurepip --upgrade && \
-    python3 -m pip install --upgrade pip && \
-    python3 -m venv venv && \
+  commands:
+    build:
+      - python3 -m ensurepip --upgrade # Upgrade pip (optional)
+      - python3 -m pip install --upgrade pip
+      - pip3 install virtualenv
+      - python3 -m venv venv
+      - source venv/bin/activate
+      - pip3 install Django # Install Django and dependencies
+      - pip3 install -r requirements.txt
+    post-build:
+      - source venv/bin/activate
+      - python3 manage.py makemigrations
+      - python3 manage.py migrate
+      - python3 manage.py collectstatic
+  env:
+    - name: DEBUG
+      value: "on"
+    - name: SECRET_KEY
+      value: 'django-insecure-r(vctop4h_)2ciq#!38tr(bsr^qoyr%t$7*buweve1ikl=&1%0'
+    - name: ALLOWED_HOSTS
+      value: "*"
+run:
+  runtime-version: 3.11
+  command: |
     source venv/bin/activate && \
-    pip3 install -r requirements.txt && \
-    python3 manage.py makemigrations && \
-    python3 manage.py migrate && \
-    python3 manage.py collectstatic --noinput
-
-env:
-  variables:
+    gunicorn config.wsgi:application --bind 0.0.0.0:8080 --log-file -
+  network:
+    port: 8080  
+  env:
     - name: DEBUG
       value: "on"
     - name: SECRET_KEY
@@ -21,20 +37,12 @@ env:
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DATABASE_NAME
-      value: "madhuramkitchen"
+      value: "madhuramkitchen" 
     - name: DATABASE_HOST
-      value: "madhuramkitchen.c3y62mus6911.ap-south-1.rds.amazonaws.com"
+      value: "madhuramkitchen.c3y62mus6911.ap-south-1.rds.amazonaws.com" 
     - name: DATABASE_USERNAME
-      value: "admin"
+      value: "admin" 
     - name: DATABASE_PASSWORD
-      value: "saivanapalli"
+      value: "saivanapalli"  
     - name: DATABASE_PORT
-      value: "3306"
-
-run:
-  runtime-version: 3.11
-  command: |
-    source venv/bin/activate && \
-    gunicorn config.wsgi:application --bind 0.0.0.0:8000 --log-file -
-  network:
-    port: 8000
+      value: "3306" 
