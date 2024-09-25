@@ -5,7 +5,6 @@ build:
     build:
       - python3 -m ensurepip --upgrade  # Upgrade pip (optional)
       - pip3 install virtualenv            # Install virtualenv
-      - python3 -m venv venv            # Create virtual environment
       - source venv/bin/activate           # Activate virtual environment
       - pip3 install Django                 # Install Django in the virtual environment
       - pip3 install -r requirements.txt    # Install all dependencies, including Django and gunicorn
