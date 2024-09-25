@@ -2,19 +2,15 @@ version: 1.0
 runtime: python311
 
 build:
-  commands:
-    # Install virtual environment package
-    - python3 -m ensurepip --upgrade
-    - python3 -m pip install --upgrade pip
-    # Create and activate virtual environment
-    - python3 -m venv venv
-    - source venv/bin/activate
-    # Install required dependencies
-    - pip3 install -r requirements.txt
-    # Run Django database migrations and collect static files
-    - python3 manage.py makemigrations
-    - python3 manage.py migrate
-    - python3 manage.py collectstatic --noinput
+  commands: |
+    python3 -m ensurepip --upgrade && \
+    python3 -m pip install --upgrade pip && \
+    python3 -m venv venv && \
+    source venv/bin/activate && \
+    pip3 install -r requirements.txt && \
+    python3 manage.py makemigrations && \
+    python3 manage.py migrate && \
+    python3 manage.py collectstatic --noinput
 
 env:
   variables:
