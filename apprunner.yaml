@@ -19,12 +19,7 @@ build:
       value: "*"
 run:
   runtime-version: 3.11
-  command: pip3 install gunicorn config.wsgi # Install gunicorn at runtime
-  pre-run: [] # Remove pre-run section
   command: python3 -m gunicorn config.wsgi:application --bind 0.0.0.0:8000 --log-file -
-  network: 
-    port:  8000
-    env:   8000  
   env:
     - name: DEBUG
       value: "on"
