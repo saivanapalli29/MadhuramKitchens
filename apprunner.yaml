@@ -4,14 +4,9 @@ build:
   commands:
     build:
       - python3 -m ensurepip --upgrade # Upgrade pip (optional)
-      - python3 -m pip install --upgrade pip
-      - pip3 install virtualenv
-      - python3 -m venv venv
-      - source venv/bin/activate
       - pip3 install Django # Install Django and dependencies
       - pip3 install -r requirements.txt
     post-build:
-      - source venv/bin/activate
       - python3 manage.py makemigrations
       - python3 manage.py migrate
       - python3 manage.py collectstatic
@@ -24,11 +19,12 @@ build:
       value: "*"
 run:
   runtime-version: 3.11
-  command: |
-    source venv/bin/activate && \
-    gunicorn config.wsgi:application --bind 0.0.0.0:8080 --log-file -
-  network:
-    port: 8080  
+  command: pip3 install gunicorn config.wsgi # Install gunicorn at runtime
+  pre-run: [] # Remove pre-run section
+  command: gunicorn config.wsgi --log-file -
+  network: 
+    port:  8080
+    env:   8080  
   env:
     - name: DEBUG
       value: "on"
