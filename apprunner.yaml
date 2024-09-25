@@ -1,7 +1,8 @@
 version: 1.0
 runtime: python311
+
 build:
- commands:
+  commands:
     # Install virtual environment package
     - python3 -m ensurepip --upgrade
     - python3 -m pip install --upgrade pip
@@ -9,12 +10,14 @@ build:
     - python3 -m venv venv
     - source venv/bin/activate
     # Install required dependencies
-    - pip install -r requirements.txt
+    - pip3 install -r requirements.txt
     # Run Django database migrations and collect static files
-    - python manage.py makemigrations
-    - python manage.py migrate
-    - python manage.py collectstatic --noinput
-  env:
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
+    - python3 manage.py collectstatic --noinput
+
+env:
+  variables:
     - name: DEBUG
       value: "on"
     - name: SECRET_KEY
@@ -37,5 +40,5 @@ run:
   command: |
     source venv/bin/activate && \
     gunicorn config.wsgi:application --bind 0.0.0.0:8000 --log-file -
-  network: 
+  network:
     port: 8000
