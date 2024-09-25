@@ -1,19 +1,19 @@
 version: 1.0
 runtime: python311
 build:
-  commands:
-    build:
-      - python3 -m ensurepip --upgrade  # Upgrade pip (optional)
-      - pip3 install virtualenv            # Install virtualenv
-      - source venv/bin/activate           # Activate virtual environment
-      - pip3 install Django                 # Install Django in the virtual environment
-      - pip3 install -r requirements.txt    # Install all dependencies, including Django and gunicorn
-    post-build:
-      - source venv/bin/activate           # Activate virtual environment for post-build steps
-      - python3 manage.py makemigrations
-      - python3 manage.py migrate
-      - python3 manage.py collectstatic --noinput
-
+ commands:
+    # Install virtual environment package
+    - python3 -m ensurepip --upgrade
+    - python3 -m pip install --upgrade pip
+    # Create and activate virtual environment
+    - python3 -m venv venv
+    - source venv/bin/activate
+    # Install required dependencies
+    - pip install -r requirements.txt
+    # Run Django database migrations and collect static files
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - python manage.py collectstatic --noinput
   env:
     - name: DEBUG
       value: "on"
@@ -36,7 +36,6 @@ run:
   runtime-version: 3.11
   command: |
     source venv/bin/activate && \
-    gunicorn config.wsgi:application --bind 0.0.0.0:8080 --log-file -
+    gunicorn config.wsgi:application --bind 0.0.0.0:8000 --log-file -
   network: 
     port: 8000
-    env: 8000
