@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME': os.getenv('DATABASE_NAME', 'sai29'),
+         'NAME': os.getenv('DATABASE_NAME', 'madhuramkitchen'),
          'USER': os.getenv('DATABASE_USER', 'admin'),
          'PASSWORD': os.getenv('DATABASE_PASSWORD', 'saivanapalli'),
          'HOST': os.getenv('DATABASE_HOST', 'madhuramkitchen.c3y62mus6911.ap-south-1.rds.amazonaws.com'),
