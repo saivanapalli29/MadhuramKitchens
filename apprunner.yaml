@@ -4,6 +4,7 @@ build:
   commands:
     build:
       - python3 -m ensurepip --upgrade # Upgrade pip (optional)
+      - pip3 install gunicorn==20.1.0
       - pip3 install Django # Install Django and dependencies
       - pip3 install -r requirements.txt
     post-build:
